@@ -2,22 +2,24 @@ CREATE TABLE users (
     id            SERIAL PRIMARY KEY,
     email         VARCHAR(255) NOT NULL UNIQUE,
     password      VARCHAR(255) NOT NULL,
-    role          VARCHAR(20)  NOT NULL CHECK (role IN ('admin', 'student')),
-    is_active     BOOLEAN      NOT NULL DEFAULT TRUE,
-    created_at    TIMESTAMP    NOT NULL DEFAULT NOW()
+    is_admin      BOOLEAN NOT NULL DEFAULT FALSE,
+    is_active     BOOLEAN NOT NULL DEFAULT TRUE,
+    created_at    TIMESTAMP NOT NULL DEFAULT NOW()
 );
 
 CREATE TABLE courses (
     id            SERIAL PRIMARY KEY,
+    code          VARCHAR(50) NOT NULL UNIQUE,
     name          VARCHAR(255) NOT NULL,
     description   TEXT,
-    created_at    TIMESTAMP    NOT NULL DEFAULT NOW()
+    created_at    TIMESTAMP NOT NULL DEFAULT NOW()
 );
 
 CREATE TABLE exams (
     id            SERIAL PRIMARY KEY,
     course_id     INTEGER NOT NULL REFERENCES courses(id) ON DELETE RESTRICT,
     name          VARCHAR(255) NOT NULL,
+    description   TEXT,
     start_date    TIMESTAMP NOT NULL,
     end_date      TIMESTAMP NOT NULL,
     created_at    TIMESTAMP NOT NULL DEFAULT NOW(),
@@ -53,7 +55,8 @@ CREATE TABLE answers (
     id            SERIAL PRIMARY KEY,
     attempt_id    INTEGER NOT NULL REFERENCES attempts(id) ON DELETE CASCADE,
     question_id   INTEGER NOT NULL REFERENCES questions(id),
-    choice_id     INTEGER REFERENCES choices(id)
+    choice_id     INTEGER REFERENCES choices(id),
+    UNIQUE (attempt_id, question_id)
 );
 
 CREATE INDEX idx_exams_course_id ON exams(course_id);
