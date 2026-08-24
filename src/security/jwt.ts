@@ -1,5 +1,8 @@
 import jwt from "jsonwebtoken";
 
+export class TokenExpiredError extends Error {}
+export class TokenInvalidError extends Error {}
+
 const JWT_SECRET = process.env.JWT_SECRET;
 
 if (!JWT_SECRET) {
@@ -16,9 +19,6 @@ export interface JwtPayload {
 export const signToken = (payload: JwtPayload): string => {
   return jwt.sign(payload, JWT_SECRET, { expiresIn: EXPIRES_IN });
 };
-
-export class TokenExpiredError extends Error {}
-export class TokenInvalidError extends Error {}
 
 export const verifyToken = (token: string): JwtPayload => {
   try {
