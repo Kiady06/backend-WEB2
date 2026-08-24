@@ -1,9 +1,19 @@
 import bcrypt from "bcrypt";
 import { UserRepository } from "../repositories/UserRepository";
 import { signToken } from "../security/jwt";
+import { AppError } from "./errors/AppError";
 
-export class InvalidCredentialsError extends Error {}
-export class AccountDisabledError extends Error {}
+export class InvalidCredentialsError extends AppError {
+  constructor(message = "Invalid email or password") {
+    super(message, 401);
+  }
+}
+
+export class AccountDisabledError extends AppError {
+  constructor(message = "This account has been disabled") {
+    super(message, 403);
+  }
+}
 
 interface LoginResult {
   token: string;
@@ -18,17 +28,17 @@ const login = async (email: string, password: string): Promise<LoginResult> => {
   const user = await UserRepository.findByEmail(email);
 
   if (!user) {
-    throw new InvalidCredentialsError("Invalid email or password");
+    throw new InvalidCredentialsError();
   }
 
   if (!user.isActive) {
-    throw new AccountDisabledError("This account has been disabled");
+    throw new AccountDisabledError();
   }
 
   const passwordMatches = await bcrypt.compare(password, user.passwordHash);
 
   if (!passwordMatches) {
-    throw new InvalidCredentialsError("Invalid email or password");
+    throw new InvalidCredentialsError();
   }
 
   const token = signToken({ id: user.id, isAdmin: user.isAdmin });
