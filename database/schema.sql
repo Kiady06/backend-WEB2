@@ -1,4 +1,4 @@
-CREATE TABLE users (
+CREATE TABLE IF NOT EXISTS users (
     id            SERIAL PRIMARY KEY,
     email         VARCHAR(255) NOT NULL UNIQUE,
     password      VARCHAR(255) NOT NULL,
@@ -7,7 +7,7 @@ CREATE TABLE users (
     created_at    TIMESTAMP NOT NULL DEFAULT NOW()
 );
 
-CREATE TABLE courses (
+CREATE TABLE IF NOT EXISTS courses (
     id            SERIAL PRIMARY KEY,
     code          VARCHAR(50) NOT NULL UNIQUE,
     name          VARCHAR(255) NOT NULL,
@@ -15,7 +15,7 @@ CREATE TABLE courses (
     created_at    TIMESTAMP NOT NULL DEFAULT NOW()
 );
 
-CREATE TABLE exams (
+CREATE TABLE IF NOT EXISTS exams (
     id            SERIAL PRIMARY KEY,
     course_id     INTEGER NOT NULL REFERENCES courses(id) ON DELETE RESTRICT,
     name          VARCHAR(255) NOT NULL,
@@ -26,7 +26,7 @@ CREATE TABLE exams (
     CHECK (end_date > start_date)
 );
 
-CREATE TABLE questions (
+CREATE TABLE IF NOT EXISTS questions (
     id            SERIAL PRIMARY KEY,
     exam_id       INTEGER NOT NULL REFERENCES exams(id) ON DELETE CASCADE,
     statement     TEXT NOT NULL,
@@ -34,14 +34,14 @@ CREATE TABLE questions (
     created_at    TIMESTAMP NOT NULL DEFAULT NOW()
 );
 
-CREATE TABLE choices (
+CREATE TABLE IF NOT EXISTS choices (
     id            SERIAL PRIMARY KEY,
     question_id   INTEGER NOT NULL REFERENCES questions(id) ON DELETE CASCADE,
     choice_text   TEXT NOT NULL,
     is_correct    BOOLEAN NOT NULL DEFAULT FALSE
 );
 
-CREATE TABLE attempts (
+CREATE TABLE IF NOT EXISTS attempts (
     id            SERIAL PRIMARY KEY,
     student_id    INTEGER NOT NULL REFERENCES users(id),
     exam_id       INTEGER NOT NULL REFERENCES exams(id),
@@ -51,7 +51,7 @@ CREATE TABLE attempts (
     UNIQUE (student_id, exam_id)
 );
 
-CREATE TABLE answers (
+CREATE TABLE IF NOT EXISTS answers (
     id            SERIAL PRIMARY KEY,
     attempt_id    INTEGER NOT NULL REFERENCES attempts(id) ON DELETE CASCADE,
     question_id   INTEGER NOT NULL REFERENCES questions(id),
@@ -59,8 +59,8 @@ CREATE TABLE answers (
     UNIQUE (attempt_id, question_id)
 );
 
-CREATE INDEX idx_exams_course_id ON exams(course_id);
-CREATE INDEX idx_questions_exam_id ON questions(exam_id);
-CREATE INDEX idx_choices_question_id ON choices(question_id);
-CREATE INDEX idx_attempts_exam_id ON attempts(exam_id);
-CREATE INDEX idx_answers_attempt_id ON answers(attempt_id);
+CREATE INDEX IF NOT EXISTS idx_exams_course_id ON exams(course_id);
+CREATE INDEX IF NOT EXISTS idx_questions_exam_id ON questions(exam_id);
+CREATE INDEX IF NOT EXISTS idx_choices_question_id ON choices(question_id);
+CREATE INDEX IF NOT EXISTS idx_attempts_exam_id ON attempts(exam_id);
+CREATE INDEX IF NOT EXISTS idx_answers_attempt_id ON answers(attempt_id);

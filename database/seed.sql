@@ -1,15 +1,17 @@
+CREATE EXTENSION IF NOT EXISTS pgcrypto;
+
 -- =========================
 -- USERS
 -- =========================
 
 INSERT INTO users (email, password, is_admin, is_active)
 VALUES
-('admin@example.com', 'admin123', TRUE, TRUE),
-('alice@example.com', 'password123', FALSE, TRUE),
-('bob@example.com', 'password123', FALSE, TRUE),
-('charlie@example.com', 'password123', FALSE, TRUE),
-('david@example.com', 'password123', FALSE, TRUE),
-('inactive@example.com', 'password123', FALSE, FALSE);
+('admin@example.com', crypt('admin', gen_salt('bf')), TRUE, TRUE),
+('alice@example.com', crypt('password123', gen_salt('bf')), FALSE, TRUE),
+('bob@example.com', crypt('password123', gen_salt('bf')), FALSE, TRUE),
+('charlie@example.com', crypt('password123', gen_salt('bf')), FALSE, TRUE),
+('david@example.com', crypt('password123', gen_salt('bf')), FALSE, TRUE),
+('inactive@example.com', crypt('password123', gen_salt('bf')), FALSE, FALSE);
 
 
 -- =========================
