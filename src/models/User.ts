@@ -25,3 +25,10 @@ export interface StudentDTO {
   is_active: boolean;
   created_at: Date;
 }
+
+export interface UpdateStudentFields {
+  name: string | undefined;
+  email: string | undefined;
+  isActive?: boolean | undefined;
+  passwordHash?: string | undefined;
+}
