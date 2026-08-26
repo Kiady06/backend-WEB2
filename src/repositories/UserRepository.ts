@@ -27,7 +27,16 @@ const findById = async (id: number): Promise<User | null> => {
   return result.rows[0] ? mapRowToUser(result.rows[0]) : null;
 };
 
+const findAllStudents = async ():Promise<User[]> => {
+  const result = await pool.query<UserRow>(
+    "SELECT * FROM users WHERE is_admin = false"
+  );
+
+  return result.rows ? result.rows.map(mapRowToUser);
+}
+
 export const UserRepository = {
   findByEmail,
   findById,
+  findAllStudents
 };
