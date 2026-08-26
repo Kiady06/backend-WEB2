@@ -6,7 +6,7 @@ import { checkDbConnection } from "./config/db";
 import { corsOptions } from "./config/cors";
 import authRoutes from "./routes/authRoutes";
 import { errorHandler } from "./middlewares/errorHandler";
-import { ExamRepository } from "./repositories/ExamRepository";
+import studentRoutes from "./routes/studentRoutes";
 import ExamRoute from "./routes/examRoute"
 
 const app = express();
@@ -15,8 +15,8 @@ app.use(cors(corsOptions));
 app.use(express.json());
 
 app.use("/api/auth", authRoutes);
+app.use("/api/students", studentRoutes);
 
-app.use(errorHandler);
 app.use("/api/my",ExamRoute)
 
 
