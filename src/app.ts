@@ -8,6 +8,8 @@ import authRoutes from "./routes/authRoutes";
 import { errorHandler } from "./middlewares/errorHandler";
 import studentRoutes from "./routes/studentRoutes";
 import ExamRoute from "./routes/examRoute"
+import courseRoute from "./routes/courseRoute";
+import questionRoute from "./routes/questionRoute";
 
 const app = express();
 
@@ -16,7 +18,9 @@ app.use(express.json());
 
 app.use("/api/auth", authRoutes);
 app.use("/api/students", studentRoutes);
-app.use("/api/courses")
+app.use("/api/courses", courseRoute);
+app.use("/api/exams", ExamRoute);
+app.use("/api/questions", questionRoute);
 
 app.use("/api/my",ExamRoute)
 
