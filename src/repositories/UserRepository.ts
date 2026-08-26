@@ -1,13 +1,5 @@
 import { pool } from "../config/db";
-import { User, UserRow } from "../models/User";
-
-
-interface UpdateStudentFields {
-  name: string | undefined;
-  email: string | undefined;
-  isActive?: boolean | undefined;
-  passwordHash?: string | undefined;
-}
+import { User, UserRow, UpdateStudentFields } from "../models/User";
 
 const mapRowToUser = (row: UserRow): User => ({
   id: row.id,
