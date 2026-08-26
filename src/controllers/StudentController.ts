@@ -1,13 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import { StudentService } from "../services/StudentService";
-
-const parseId = (raw: string | string[] | undefined): number | null => {
-  if (typeof raw !== "string") {
-    return null;
-  }
-  const id = Number(raw);
-  return Number.isInteger(id) && id > 0 ? id : null;
-};
+import { parseId } from "./utils";
 
 const list = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   try {
