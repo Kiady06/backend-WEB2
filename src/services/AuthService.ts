@@ -19,6 +19,7 @@ interface LoginResult {
   token: string;
   user: {
     id: number;
+    name: string,
     email: string;
     name:string;
     isAdmin: string;
@@ -52,6 +53,7 @@ const login = async (email: string, password: string): Promise<LoginResult> => {
     token,
     user: {
       id: user.id,
+      name: user.name,
       email: user.email,
       name: user.name,
       isAdmin: toRole(user.isAdmin)
