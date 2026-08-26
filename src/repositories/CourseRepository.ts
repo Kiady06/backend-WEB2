@@ -62,7 +62,28 @@ export const findByCode = async (
     return result.rows[0] ?? null;
 };
 
-export const create = async (
+const findByCodeExcludingId = async (
+    code: string,
+    excludeId: number
+): Promise<Course | null> => {
+    const result = await pool.query<Course>(
+        `
+        SELECT
+            id,
+            code,
+            name,
+            description,
+            created_at
+        FROM courses
+        WHERE LOWER(code) = LOWER($1) AND id != $2;
+        `,
+        [code, excludeId]
+    );
+
+    return result.rows[0] ?? null;
+};
+
+const create = async (
     data: CreateCourse
 ): Promise<Course> => {
     const result = await pool.query<Course>(
@@ -94,7 +115,7 @@ export const create = async (
   return row;
 };
 
-export const update = async (
+const update = async (
     id: number,
     data: UpdateCourse
 ): Promise<Course | null> => {
@@ -124,7 +145,7 @@ export const update = async (
     return result.rows[0] ?? null;
 };
 
-export const remove = async (
+const remove = async (
     id: number
 ): Promise<boolean> => {
     const result = await pool.query(
@@ -138,7 +159,7 @@ export const remove = async (
     return (result.rowCount ?? 0) > 0;
 };
 
-export const hasExams = async (
+const hasExams = async (
     id: number
 ): Promise<boolean> => {
     const result = await pool.query<{ count: number }>(
@@ -151,4 +172,15 @@ export const hasExams = async (
     );
 
     return (result.rows[0]?.count ?? 0) > 0;
+};
+
+export const CourseRepository = {
+    findAll,
+    findById,
+    findByCode,
+    findByCodeExcludingId,
+    create,
+    update,
+    remove,
+    hasExams,
 };

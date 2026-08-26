@@ -3,8 +3,8 @@ export interface Course {
     code: string;
     name: string;
     description: string | null;
-    created_at: Date;
-    exam_count?: number;
+    createdAt: Date;
+    examCount: number;
 }
 
 export interface CreateCourse {
@@ -24,5 +24,6 @@ export interface CourseDTO {
     code: string;
     name: string;
     description: string | null;
-    exam_count: number;
+    createdAt: Date;
+    examCount: number;
 }
