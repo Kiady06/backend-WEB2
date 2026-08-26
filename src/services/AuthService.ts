@@ -21,8 +21,12 @@ interface LoginResult {
     id: number;
     name: string,
     email: string;
-    isAdmin: boolean;
+    isAdmin: string;
   };
+}
+
+const toRole = (isAdmin:boolean) => {
+  return isAdmin ? "admin" : "student";
 }
 
 const login = async (email: string, password: string): Promise<LoginResult> => {
@@ -50,7 +54,7 @@ const login = async (email: string, password: string): Promise<LoginResult> => {
       id: user.id,
       name: user.name,
       email: user.email,
-      isAdmin: user.isAdmin,
+      isAdmin: toRole(user.isAdmin)
     },
   };
 };
