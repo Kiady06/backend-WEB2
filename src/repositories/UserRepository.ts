@@ -32,7 +32,7 @@ const findAllStudents = async ():Promise<User[]> => {
     "SELECT * FROM users WHERE is_admin = false"
   );
 
-  return result.rows ? result.rows.map(mapRowToUser);
+  return result.rows.map(mapRowToUser);
 }
 
 export const UserRepository = {

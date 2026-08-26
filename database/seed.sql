@@ -2,14 +2,9 @@
 -- USERS
 -- =========================
 
-INSERT INTO users (email, password, is_admin, is_active)
+INSERT INTO users (email, name, password, is_admin, is_active)
 VALUES
-('admin@example.com', 'admin123', TRUE, TRUE),
-('alice@example.com', 'password123', FALSE, TRUE),
-('bob@example.com', 'password123', FALSE, TRUE),
-('charlie@example.com', 'password123', FALSE, TRUE),
-('david@example.com', 'password123', FALSE, TRUE),
-('inactive@example.com', 'password123', FALSE, FALSE);
+('admin@example.com', admin , '$2b$10$57lP9dCagJvTfAXv96QMpugYH2ynkbt6naCy0iAAgAKm1WIjl725m', TRUE, TRUE);
 
 
 -- =========================

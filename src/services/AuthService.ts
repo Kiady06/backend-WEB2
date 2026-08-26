@@ -59,6 +59,8 @@ const login = async (email: string, password: string): Promise<LoginResult> => {
   };
 };
 
+// const getAllStudents
+
 export const AuthService = {
   login,
 };
