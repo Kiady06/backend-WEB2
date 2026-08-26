@@ -4,6 +4,7 @@ import type { User, UserRow } from "../models/User";
 const mapRowToUser = (row: UserRow): User => ({
   id: row.id,
   email: row.email,
+  name:row.name,
   passwordHash: row.password,
   isAdmin: row.is_admin,
   isActive: row.is_active,
