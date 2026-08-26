@@ -19,6 +19,7 @@ interface LoginResult {
   token: string;
   user: {
     id: number;
+    name: string,
     email: string;
     isAdmin: boolean;
   };
@@ -47,6 +48,7 @@ const login = async (email: string, password: string): Promise<LoginResult> => {
     token,
     user: {
       id: user.id,
+      name: user.name,
       email: user.email,
       isAdmin: user.isAdmin,
     },
