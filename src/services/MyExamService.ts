@@ -1,5 +1,5 @@
 import { ExamRepository } from "../repositories/ExamRepository";
-import { NotFoundError } from "./errors/CommonErrors";
+import { NotFoundError ,ConflictError} from "./errors/CommonErrors";
 import { AppError } from "./errors/AppError";
 import { attemptRepository } from "../repositories/attemptRepository";
 import { QuestionService } from "./QuestionService";
@@ -28,7 +28,7 @@ export const MyExamService = {
       examId
     );
     if (existingAttempt) {
-      throw new AppError("You have already taken this exam", 409);
+      throw new ConflictError("You have already taken this exam");
     }
 
     const questions = await QuestionService.listForExam(examId);

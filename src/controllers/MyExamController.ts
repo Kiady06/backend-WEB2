@@ -10,5 +10,16 @@ export const MyExamController ={
         }catch (err){
             next(err);
         }
+    },
+
+    async getExamToTake(req: Request, res: Response, next: NextFunction) {
+    try {
+      const studentId = (req as any).user.id;
+      const examId = Number(req.params.id);
+      const data = await MyExamService.getExamToTake(studentId, examId);
+      res.status(200).json(data);
+    } catch (err) {
+      next(err);
     }
+  },
 }

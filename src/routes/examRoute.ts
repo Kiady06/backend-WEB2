@@ -9,6 +9,7 @@ const router= Router();
 router.use(authMiddleware, requireStudent);
 
 router.get("/exams", MyExamController.getAvailableExams);
+router.get("/exams/:id", MyExamController.getExamToTake);
 
 
 export default router;
