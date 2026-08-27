@@ -23,5 +23,5 @@ export const ExamRepository={
       [studentId]
         );
         return result.rows;
-    }
+    },
 };
