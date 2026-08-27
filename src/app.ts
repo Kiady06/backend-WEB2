@@ -21,11 +21,8 @@ app.use(express.json());
 app.use("/api/auth", authRoutes);
 app.use("/api/students", studentRoutes);
 app.use("/api/courses", courseRoute);
-app.use("/api/exams", ExamRoute);
+app.use("/api", ExamRoute);
 app.use("/api/questions", questionRoute);
-
-app.use("/api/my",ExamRoute)
-
 
 app.use(errorHandler); 
 

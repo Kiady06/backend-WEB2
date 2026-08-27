@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import { ExamService } from "../services/examService";
 import { resultService } from "../services/ResultService";
 
-export const examController = {
+export const ExamController = {
   async getAll(req: Request, res: Response, next: NextFunction) {
     try {
       const exams = await ExamService.getAll();
