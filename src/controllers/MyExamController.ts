@@ -34,4 +34,14 @@ export const MyExamController ={
       next(err);
     }
   },
+
+  async getMyResults(req: Request, res: Response, next: NextFunction) {
+    try {
+      const studentId = (req as any).user.id;
+      const data = await MyExamService.getMyResults(studentId);
+      res.status(200).json(data);
+    } catch (err) {
+      next(err);
+    }
+  },
 }

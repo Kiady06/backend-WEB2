@@ -119,5 +119,30 @@ export const MyExamService = {
       throw err;
     }
   },
+
+  async getMyResults(studentId: number) {
+    const attempts = await attemptRepository.findAllByStudent(studentId);
+
+    const results = attempts.map((a: any) => ({
+      exam_name: a.exam_name,
+      course_name: a.course_name,
+      score: a.score,
+      total_points: a.total_points,
+      submitted_at: a.submitted_at,
+      percentage:
+        a.total_points > 0
+          ? Math.round((a.score / a.total_points) * 100)
+          : 0
+    }));
+
+    const average =
+      results.length > 0
+        ? Math.round(
+            results.reduce((sum, r) => sum + r.percentage, 0) / results.length
+          )
+        : 0;
+
+    return { results, average };
+  }
 }
 
