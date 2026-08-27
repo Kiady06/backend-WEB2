@@ -10,6 +10,6 @@ router.use(authMiddleware, requireStudent);
 
 router.get("/exams", MyExamController.getAvailableExams);
 router.get("/exams/:id", MyExamController.getExamToTake);
-
+router.post("/exams/:id/submit", MyExamController.submitExam);
 
 export default router;

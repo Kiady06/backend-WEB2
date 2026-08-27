@@ -22,4 +22,16 @@ export const MyExamController ={
       next(err);
     }
   },
+
+  async submitExam(req: Request, res: Response, next: NextFunction) {
+    try {
+      const studentId = (req as any).user.id;
+      const examId = Number(req.params.id);
+      const { answers } = req.body;
+      const result = await MyExamService.submitExam(studentId, examId, answers || []);
+      res.status(200).json(result);
+    } catch (err) {
+      next(err);
+    }
+  },
 }

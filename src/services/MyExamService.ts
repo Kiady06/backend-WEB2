@@ -42,7 +42,7 @@ export const MyExamService = {
     answers: SubmittedAnswer[]
   ) {
     const exam = await ExamRepository.findById(examId);
-    if (!exam) throw new AppError("Exam not found", 404);
+    if (!exam) throw new NotFoundError("Exam not found");
 
     const now = new Date();
     if (now < new Date(exam.start_date) || now > new Date(exam.end_date)) {
@@ -54,7 +54,7 @@ export const MyExamService = {
       examId
     );
     if (existingAttempt) {
-      throw new AppError("You have already submitted this exam", 409);
+      throw new ConflictError("You have already submitted this exam");
     }
 
     const questions = await QuestionRepository.findByExamId(examId);
@@ -114,7 +114,7 @@ export const MyExamService = {
       return { score, total_points: totalPoints, correction };
     } catch (err: any) {
       if (err.code === "23505") {
-        throw new AppError("You have already submitted this exam", 409);
+        throw new ConflictError("You have already submitted this exam");
       }
       throw err;
     }
