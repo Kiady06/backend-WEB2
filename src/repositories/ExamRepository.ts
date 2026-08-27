@@ -2,6 +2,13 @@ import {pool} from "../config/db";
 import type { Exam } from "../models/Exam";
 
 export const ExamRepository={
+    async findById(id: number): Promise<Exam | null> {
+    const result = await pool.query("SELECT * FROM exams WHERE id = $1", [
+      id,
+    ]);
+    return result.rows[0] || null;
+  },
+  
     async findAvailableForStudent(studentId:number): Promise<Exam[]>{
         const result= await pool.query(
         `SELECT e.*, c.name AS course_name
