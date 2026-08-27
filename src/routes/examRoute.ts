@@ -10,11 +10,13 @@ const router= Router();
 
 router.use(authMiddleware);
 
+// for students
 router.get("/my/exams", requireStudent, MyExamController.getAvailableExams);
 router.get("/my/exams/:id", requireStudent, MyExamController.getExamToTake);
 router.post("/my/exams/:id/submit", requireStudent, MyExamController.submitExam);
 router.get("/my/results", requireStudent, MyExamController.getMyResults);
 
+// for admins
 router.get("/exams",requireAdmin,ExamController.getAll);
 router.post("/exams",requireAdmin,ExamController.create);
 router.get("/exams/:id",requireAdmin,ExamController.getById);

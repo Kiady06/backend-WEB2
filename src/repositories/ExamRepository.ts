@@ -77,4 +77,5 @@ export const ExamRepository={
         return result.rows;
     },
 
+
 };
