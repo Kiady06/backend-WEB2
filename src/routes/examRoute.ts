@@ -25,5 +25,9 @@ router.get("/exams/:id/questions",requireAdmin,QuestionController.listForExam);
 router.post("/exams/:id/questions",QuestionController.create);
 
 router.get("/exams/:id/results", ExamController.getResults);
+router.get("/exams", MyExamController.getAvailableExams);
+router.get("/exams/:id", MyExamController.getExamToTake);
+router.post("/exams/:id/submit", MyExamController.submitExam);
+router.get("/results", MyExamController.getMyResults);
 
 export default router;
