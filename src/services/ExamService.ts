@@ -16,6 +16,7 @@ export const ExamService = {
    async create(
     courseId: number,
     name: string,
+    description: string,
     startDate: string,
     endDate: string
   ) {
@@ -29,10 +30,10 @@ export const ExamService = {
     if (new Date(endDate) <= new Date(startDate)) {
       throw new BadRequestError("The end date must be after the start date");
     }
-    return ExamRepository.create(courseId, name, startDate, endDate);
+    return ExamRepository.create(courseId, name, description,startDate, endDate);
   },
 
-   async update(id: number, name: string, startDate: string, endDate: string) {
+   async update(id: number, name: string, description: string, startDate: string, endDate: string) {
     const exam = await ExamRepository.findById(id);
     if (!exam) throw new NotFoundError("Exam not found");
 
@@ -40,7 +41,7 @@ export const ExamService = {
       throw new BadRequestError("The end date must be after the start date");
     }
 
-    const updated = await ExamRepository.update(id, name, startDate, endDate);
+    const updated = await ExamRepository.update(id, name, description, startDate, endDate);
     return updated;
   },
 
