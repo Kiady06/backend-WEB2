@@ -10,11 +10,13 @@ const router= Router();
 
 router.use(authMiddleware);
 
+// for students
 router.get("/my/exams", requireStudent, MyExamController.getAvailableExams);
 router.get("/my/exams/:id", requireStudent, MyExamController.getExamToTake);
 router.post("/my/exams/:id/submit", requireStudent, MyExamController.submitExam);
 router.get("/my/results", requireStudent, MyExamController.getMyResults);
 
+// for admins
 router.get("/exams",requireAdmin,ExamController.getAll);
 router.post("/exams",requireAdmin,ExamController.create);
 router.get("/exams/:id",requireAdmin,ExamController.getById);
@@ -25,9 +27,5 @@ router.get("/exams/:id/questions",requireAdmin,QuestionController.listForExam);
 router.post("/exams/:id/questions",QuestionController.create);
 
 router.get("/exams/:id/results", ExamController.getResults);
-router.get("/exams", MyExamController.getAvailableExams);
-router.get("/exams/:id", MyExamController.getExamToTake);
-router.post("/exams/:id/submit", MyExamController.submitExam);
-router.get("/results", MyExamController.getMyResults);
 
 export default router;
