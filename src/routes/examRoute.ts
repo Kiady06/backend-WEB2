@@ -1,6 +1,7 @@
 import {Router} from "express";
 import { MyExamController } from "../controllers/MyExamController";
 import { authMiddleware } from "../middlewares/authMiddleware";
+import { validate } from "../middlewares/validate";
 import { requireAdmin, requireStudent } from "../middlewares/roleMiddleware";
 import { ExamController } from "../controllers/ExamController";
 import { QuestionController } from "../controllers/QuestionController";
@@ -20,9 +21,9 @@ router.get("/my/results", requireStudent, MyExamController.getMyResults);
 
 // for admins
 router.get("/exams",requireAdmin,ExamController.getAll);
-router.post("/exams",requireAdmin,ExamController.create);
+router.post("/exams",requireAdmin,validate(examCreateSchema),ExamController.create);
 router.get("/exams/:id",requireAdmin,ExamController.getById);
-router.put("/exams/:id",requireAdmin,ExamController.update);
+router.put("/exams/:id",requireAdmin,validate(examUpdateSchema),ExamController.update);
 router.delete("/exams/:id",requireAdmin,ExamController.remove);
 
 router.get("/exams/:id/questions",requireAdmin,QuestionController.listForExam);
