@@ -5,7 +5,8 @@ import { validate } from "../middlewares/validate";
 import { requireAdmin, requireStudent } from "../middlewares/roleMiddleware";
 import { ExamController } from "../controllers/ExamController";
 import { QuestionController } from "../controllers/QuestionController";
-import { examCreateSchema, examUpdateSchema } from "../models/ExamSchemas";
+import { validate } from "../middlewares/validate";
+import { createQuestionSchema } from "../models/QuestionSchemas";
 
 
 const router= Router();
@@ -26,7 +27,7 @@ router.put("/exams/:id",requireAdmin,validate(examUpdateSchema),ExamController.u
 router.delete("/exams/:id",requireAdmin,ExamController.remove);
 
 router.get("/exams/:id/questions",requireAdmin,QuestionController.listForExam);
-router.post("/exams/:id/questions",QuestionController.create);
+router.post("/exams/:id/questions", requireAdmin, validate(createQuestionSchema), QuestionController.create);
 
 router.get("/exams/:id/results", ExamController.getResults);
 
