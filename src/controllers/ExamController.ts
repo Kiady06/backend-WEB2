@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import { ExamService } from "../services/examService";
+import { ExamService } from "../services/ExamService";
 import { resultService } from "../services/ResultService";
 
 export const ExamController = {

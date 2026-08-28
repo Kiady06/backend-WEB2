@@ -1,7 +1,7 @@
 import { ExamRepository } from "../repositories/ExamRepository";
 import { NotFoundError ,ConflictError} from "./errors/CommonErrors";
 import { AppError } from "./errors/AppError";
-import { attemptRepository } from "../repositories/attemptRepository";
+import { attemptRepository } from "../repositories/AttemptRepository";
 import { QuestionService } from "./QuestionService";
 import { QuestionRepository } from "../repositories/QuestionRepository";
 
