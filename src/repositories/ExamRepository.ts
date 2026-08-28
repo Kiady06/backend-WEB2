@@ -22,8 +22,8 @@ export const ExamRepository={
   ): Promise<Exam> {
     const result = await pool.query(
       `INSERT INTO exams (course_id, name, description, start_date, end_date)
-       VALUES ($1, $2, $3, $4) RETURNING *`,
-      [courseId, name, startDate, endDate]
+      VALUES ($1, $2, $3, $4, $5) RETURNING *`,
+      [courseId, name, description, startDate, endDate]
     );
     return result.rows[0];
   },

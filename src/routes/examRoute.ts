@@ -21,7 +21,7 @@ router.get("/exams",requireAdmin,ExamController.getAll);
 router.post("/exams",requireAdmin,ExamController.create);
 router.get("/exams/:id",requireAdmin,ExamController.getById);
 router.put("/exams/:id",requireAdmin,ExamController.update);
-router.delete("/exams",requireAdmin,ExamController.remove);
+router.delete("/exams/:id",requireAdmin,ExamController.remove);
 
 router.get("/exams/:id/questions",requireAdmin,QuestionController.listForExam);
 router.post("/exams/:id/questions",QuestionController.create);

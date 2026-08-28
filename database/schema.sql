@@ -32,6 +32,7 @@ CREATE TABLE IF NOT EXISTS questions (
     exam_id       INTEGER NOT NULL REFERENCES exams(id) ON DELETE CASCADE,
     statement     TEXT NOT NULL,
     points        INTEGER NOT NULL DEFAULT 1,
+    position      INTEGER NOT NULL DEFAULT 1,   
     created_at    TIMESTAMP NOT NULL DEFAULT NOW()
 );
 
