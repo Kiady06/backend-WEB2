@@ -1,12 +1,12 @@
 import {Router} from "express";
 import { MyExamController } from "../controllers/MyExamController";
 import { authMiddleware } from "../middlewares/authMiddleware";
-import { validate } from "../middlewares/validate";
 import { requireAdmin, requireStudent } from "../middlewares/roleMiddleware";
 import { ExamController } from "../controllers/ExamController";
 import { QuestionController } from "../controllers/QuestionController";
 import { validate } from "../middlewares/validate";
 import { createQuestionSchema } from "../models/QuestionSchemas";
+import { examCreateSchema, examUpdateSchema } from "../models/ExamSchemas";
 
 
 const router= Router();
