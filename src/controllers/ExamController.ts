@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import { ExamService } from "../services/examService";
+import { ExamService } from "../services/ExamService";
 import { resultService } from "../services/ResultService";
 
 export const ExamController = {
@@ -24,8 +24,8 @@ export const ExamController = {
 
   async create(req: Request, res: Response, next: NextFunction) {
     try {
-      const { course_id, name, start_date, end_date } = req.body;
-      const exam = await ExamService.create(course_id, name, start_date, end_date);
+      const { course_id, name, desc, start_date, end_date } = req.body;
+      const exam = await ExamService.create(course_id, name, desc, start_date, end_date);
       res.status(201).json(exam);
     } catch (err) {
       next(err);
@@ -35,8 +35,8 @@ export const ExamController = {
   async update(req: Request, res: Response, next: NextFunction) {
     try {
       const id = Number(req.params.id);
-      const { name, start_date, end_date } = req.body;
-      const exam = await ExamService.update(id, name, start_date, end_date);
+      const { name, desc, start_date, end_date } = req.body;
+      const exam = await ExamService.update(id, name, desc, start_date, end_date);
       res.status(200).json(exam);
     } catch (err) {
       next(err);

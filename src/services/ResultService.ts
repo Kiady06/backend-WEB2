@@ -1,4 +1,4 @@
-import { attemptRepository } from "../repositories/attemptRepository";
+import { attemptRepository } from "../repositories/AttemptRepository";
 import { ExamRepository } from "../repositories/ExamRepository";
 import { NotFoundError } from "./errors/CommonErrors";
 

@@ -6,7 +6,7 @@ CREATE EXTENSION IF NOT EXISTS pgcrypto;
 
 INSERT INTO users (email, name, password, is_admin, is_active)
 VALUES
-('admin@example.com', admin , '$2b$10$57lP9dCagJvTfAXv96QMpugYH2ynkbt6naCy0iAAgAKm1WIjl725m', TRUE, TRUE);
+('admin@example.com', 'admin' , '$2b$10$57lP9dCagJvTfAXv96QMpugYH2ynkbt6naCy0iAAgAKm1WIjl725m', TRUE, TRUE);
 
 
 -- =========================

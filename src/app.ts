@@ -6,7 +6,6 @@ import { checkDbConnection } from "./config/db";
 import { corsOptions } from "./config/cors";
 import authRoutes from "./routes/authRoutes";
 import { errorHandler } from "./middlewares/errorHandler";
-import { ExamRepository } from "./repositories/ExamRepository";
 import ExamRoute from "./routes/examRoute"
 import studentRoutes from "./routes/studentRoutes";
 

@@ -16,13 +16,14 @@ export const ExamRepository={
    async create(
     courseId: number,
     name: string,
+    description: string,
     startDate: string,
     endDate: string
   ): Promise<Exam> {
     const result = await pool.query(
-      `INSERT INTO exams (course_id, name, start_date, end_date)
-       VALUES ($1, $2, $3, $4) RETURNING *`,
-      [courseId, name, startDate, endDate]
+      `INSERT INTO exams (course_id, name, description, start_date, end_date)
+      VALUES ($1, $2, $3, $4, $5) RETURNING *`,
+      [courseId, name, description, startDate, endDate]
     );
     return result.rows[0];
   },
@@ -30,13 +31,14 @@ export const ExamRepository={
    async update(
     id: number,
     name: string,
+    description: string,
     startDate: string,
     endDate: string
   ): Promise<Exam | null> {
     const result = await pool.query(
-      `UPDATE exams SET name = $1, start_date = $2, end_date = $3
-       WHERE id = $4 RETURNING *`,
-      [name, startDate, endDate, id]
+      `UPDATE exams SET name = $1, description = $2, start_date = $3, end_date = $4
+       WHERE id = $5 RETURNING *`,
+      [name, description,startDate, endDate, id]
     );
     return result.rows[0] || null;
   },

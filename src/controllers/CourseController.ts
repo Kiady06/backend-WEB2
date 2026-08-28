@@ -4,7 +4,7 @@ import { parseId } from "./utils";
 
 const list =  async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
-        const courses = CourseService.list();
+        const courses = await CourseService.list();
         res.status(200).json(courses);
     } catch (err){
         next(err);
