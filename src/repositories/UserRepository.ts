@@ -59,7 +59,7 @@ const createStudent = async (name: string, email: string, passwordHash: string):
 const updateStudent = async (id: number, fields: UpdateStudentFields): Promise<User | null> => {
   const result = await pool.query<UserRow>(
     `UPDATE users
-     SET name = COALESCE($1, is_active),
+     SET name = COALESCE($1, name),
          email = COALESCE($2, email),
          is_active = COALESCE($3, is_active),
          password = COALESCE($4, password)
